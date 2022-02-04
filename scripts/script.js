@@ -7,13 +7,13 @@ function Student(firstName, lastName, yearOfBirth) {
   this.assessmentRaiting = new Array(10);
   this.assessmentIndex = 0;
 
-  this.getAge = function () {
+  Student.prototype.getAge = function () {
     let currentYear = new Date().getFullYear();
     let age = currentYear - yearOfBirth;
     console.log(`Student ${firstName + ` ` + lastName} is ${age} years old`);
   };
 
-  this.present = function () {
+  Student.prototype.present = function () {
     if (this.attendanceRaiting.length > this.attendanceIndex) {
       this.attendanceRaiting[this.attendanceIndex] = true;
       this.attendanceIndex++;
@@ -24,7 +24,7 @@ function Student(firstName, lastName, yearOfBirth) {
     throw new Error(`Attendance array is full!!!`);
   };
 
-  this.absent = function () {
+  Student.prototype.absent = function () {
     if (this.attendanceRaiting.length > this.attendanceIndex) {
       this.attendanceRaiting[this.attendanceIndex] = false;
       this.attendanceIndex++;
@@ -35,7 +35,7 @@ function Student(firstName, lastName, yearOfBirth) {
     throw new Error(`Attendance array is full!!!`);
   };
 
-  this.getAverageAttendance = function () {
+  Student.prototype.getAverageAttendance = function () {
     const averageAttendance =
       this.attendanceRaiting
         .slice(0, this.attendanceIndex)
@@ -44,7 +44,7 @@ function Student(firstName, lastName, yearOfBirth) {
     return averageAttendance;
   };
 
-  this.mark = function () {
+  Student.prototype.mark = function () {
     const assessment = +prompt(
       `Rate the skills of current student from 0 to 10, please:`,
       0
@@ -68,7 +68,7 @@ function Student(firstName, lastName, yearOfBirth) {
     throw new Error(`The array of assessments is full!!!`);
   };
 
-  this.getAverageMark = function () {
+  Student.prototype.getAverageMark = function () {
     const averageMark =
       this.assessmentRaiting.reduce((acc, singleMark) => {
         return acc + singleMark;
@@ -77,7 +77,7 @@ function Student(firstName, lastName, yearOfBirth) {
     return averageMark;
   };
 
-  this.summary = function () {
+  Student.prototype.summary = function () {
     if (this.getAverageMark() < 9 && this.getAverageAttendance() < 0.9) {
       console.log(`Редиска`);
     } else if (this.getAverageMark() < 9 || this.getAverageAttendance() < 0.9) {
